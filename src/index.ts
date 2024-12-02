@@ -78,7 +78,7 @@ export const autoloadRoutes = async (app: Hono, {
 
   for (const file of sortRoutesByParams(files)) {
     const matchedFile = file.match(/\/?\((.*?)\)/)
-    const method = matchedFile ? matchedFile[1].toUpperCase() as Method : 'get'
+    const method = matchedFile ? matchedFile[1] as Method : 'get'
 
     const filePath = `${routesDir}/${file}`
     const extension = path.extname(filePath)
