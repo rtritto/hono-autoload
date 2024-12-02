@@ -1,0 +1,68 @@
+{
+  "name": "hono-autoload",
+  "version": "0.1.0",
+  "license": "MIT",
+  "packageManager": "yarn@4.5.3",
+  "type": "module",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.mts",
+  "exports": {
+    "import": "./dist/index.mjs",
+    "types": "./dist/index.d.mts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/uws-ecosystem/uws-autoload.git"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "lint": "eslint src/**/*.ts",
+    "test": "tsx ./test/index.test.ts",
+    "build": "pkgroll",
+    "prepublishOnly": "yarn build",
+    "od": "yarn outdated"
+  },
+  "peerDependencies": {
+    "esbuild": "*",
+    "hono": "*"
+  },
+  "peerDependenciesMeta": {
+    "esbuild": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@types/bun": "^1.1.14",
+    "@types/node": "^22.10.1",
+    "@yarnpkg/sdks": "^3.2.0",
+    "esbuild": "^0.24.0",
+    "eslint": "^9.16.0",
+    "eslint-plugin-unicorn": "^56.0.1",
+    "hono": "^4.6.12",
+    "pkgroll": "^2.5.1",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2",
+    "typescript-eslint": "^8.17.0"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "keywords": [
+    "autoload",
+    "cross-platform",
+    "directory",
+    "fast",
+    "filesystem",
+    "hono",
+    "http",
+    "http-server",
+    "lightweight",
+    "microws",
+    "middleware",
+    "plugin",
+    "router",
+    "proxy-protocol"
+  ]
+}
