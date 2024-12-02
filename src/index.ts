@@ -80,7 +80,7 @@ export const autoloadRoutes = async (app: Hono, {
     const matchedFile = file.match(/\/?\((.*?)\)/)
     const method = matchedFile ? matchedFile[1] as Method : 'get'
 
-    const filePath = `${routesDir}/${file}`
+    const filePath = `${routesDir}/${file.replaceAll('\\', '/')}`
     const extension = path.extname(filePath)
     const importedFile = (typeof Bun === 'undefined')
       ? ((extension === '.ts' || extension === '.tsx')
