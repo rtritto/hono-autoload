@@ -98,6 +98,8 @@ export const autoloadRoutes = async (app: Hono, {
     const route = `${prefix}/${transformToRoute(file)}`
     if (typeof importedRoute === 'function') {
       app[method](route, importedRoute)
+    } else {
+      console.warn(`Exported function of ${filePath} is not a function`)
     }
   }
 
