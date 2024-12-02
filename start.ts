@@ -1,5 +1,6 @@
 import { serve } from '@hono/node-server'
 import { Hono } from 'hono'
+import { logger } from 'hono/logger'
 
 import { autoloadRoutes } from './src/index'
 
@@ -11,10 +12,12 @@ autoloadRoutes(
   app,
   {
     pattern: '**/*.ts',
-    prefix: '/api',
+    // prefix: '/api',
     routesDir: './test/routes'
   }
 )
+
+app.use(logger())
 
 serve(
   {
