@@ -1,13 +1,13 @@
-# uws-autoload
+# hono-autoload
 
-Plugin for [µWebSockets.js](https://github.com/uNetworking/uWebSockets.js) that autoloads all routes in a directory.
+Plugin for [Hono](https://hono.dev/) that autoloads all routes in a directory.
 
 Inspired by [elysia-autoload](https://github.com/kravetsone/elysia-autoload).
 
 ## Installation
 
 ```sh
-yarn add uws-autoload
+yarn add hono-autoload
 ```
 
 ## Usage
@@ -15,12 +15,13 @@ yarn add uws-autoload
 ### Register the Plugin
 
 ```ts
-import { App } from 'uWebSockets.js'
-import { autoloadRoutes } from 'uws-autoload'
+import { serve } from '@hono/node-server'
+import { Hono } from 'hono'
+import { autoloadRoutes } from 'hono-autoload'
 
 const port = +(process.env.PORT || 3000)
 
-const app = await autoloadRoutes(App(), {
+const app = await autoloadRoutes(new Hono(), {
   // Pattern to scan route files
   pattern: '**/*.ts',
   // Prefix to add to routes
@@ -29,29 +30,29 @@ const app = await autoloadRoutes(App(), {
   routesDir: './src/api'
 })
 
-app.listen(port, (listenSocket) => {
-  if (listenSocket) {
-    console.log(`Server running at http://localhost:${port}`)
-  } else {
-    console.log(`Failed to listen to port ${port}`)
-  }
-})
+serve(
+  {
+    fetch: app.fetch,
+    port
+  },
+  () => console.log(`Server running at http://localhost:${port}`)
+)
 ```
 
 ### Create a Route
 
 ```ts
 // /routes/index.ts
-import type { RecognizedString, TemplatedApp } from 'uWebSockets.js'
+import type { Context } from 'hono'
 
-export default (pattern: RecognizedString, app: TemplatedApp) => app.get(pattern, (res, req) => {
-  res.end('Hello World!')
-})
+export default (c: Context) => {
+  return c.text('Hello World!')
+}
 ```
 
 ### Directory Structure
 
-Guide on how `uws-autoload` matches routes:
+Guide on how `hono-autoload` matches routes:
 
 ```
 ├── app.ts
