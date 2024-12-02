@@ -1,5 +1,5 @@
 {
-  "name": "hono-autoload",
+  "name": "hono-autoloader",
   "version": "0.1.0",
   "license": "MIT",
   "type": "module",
@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/rtritto/hono-autoload.git"
+    "url": "git+https://github.com/rtritto/hono-autoloader.git"
   },
   "files": [
     "dist"

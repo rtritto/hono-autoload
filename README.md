@@ -1,4 +1,4 @@
-# hono-autoload
+# hono-autoloader
 
 Plugin for [Hono](https://hono.dev/) that autoloads all routes in a directory.
 
@@ -7,7 +7,7 @@ Inspired by [elysia-autoload](https://github.com/kravetsone/elysia-autoload).
 ## Installation
 
 ```sh
-yarn add hono-autoload
+yarn add hono-autoloader
 ```
 
 ## Usage
@@ -17,7 +17,7 @@ yarn add hono-autoload
 ```ts
 import { serve } from '@hono/node-server'
 import { Hono } from 'hono'
-import { autoloadRoutes } from 'hono-autoload'
+import { autoloadRoutes } from 'hono-autoloader'
 
 const port = +(process.env.PORT || 3000)
 
@@ -52,7 +52,7 @@ export default (c: Context) => {
 
 ### Directory Structure
 
-Guide on how `hono-autoload` matches routes:
+Guide on how `hono-autoloader` matches routes:
 
 ```
 ├── app.ts

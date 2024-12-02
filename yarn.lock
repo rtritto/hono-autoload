@@ -2345,9 +2345,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"hono-autoload@workspace:.":
+"hono-autoloader@workspace:.":
   version: 0.0.0-use.local
-  resolution: "hono-autoload@workspace:."
+  resolution: "hono-autoloader@workspace:."
   dependencies:
     "@hono/node-server": "npm:^1.13.7"
     "@types/bun": "npm:^1.1.14"
