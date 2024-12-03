@@ -80,7 +80,7 @@ export const autoloadRoutes = async (app: Hono, {
     const method = matchedFile ? matchedFile[1] as Method : 'get'
 
     const filePath = `${routesDir}/${file.replaceAll('\\', '/')}`
-    const importedFile = await import(pathToFileURL(filePath).href)
+    const importedFile = await import(pathToFileURL(filePath).href.replace(/\.(ts|tsx)$/u, ''))
 
     const resolvedImportName = typeof importKey === 'string' ? importKey : importKey(importedFile)
     const importedRoute = importedFile[resolvedImportName]
