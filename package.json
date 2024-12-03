@@ -26,20 +26,13 @@
   },
   "peerDependencies": {
     "@hono/node-server": "*",
-    "esbuild": "*",
     "hono": "*"
-  },
-  "peerDependenciesMeta": {
-    "esbuild": {
-      "optional": true
-    }
   },
   "devDependencies": {
     "@hono/node-server": "^1.13.7",
     "@types/bun": "^1.1.14",
     "@types/node": "^22.10.1",
     "@yarnpkg/sdks": "^3.2.0",
-    "esbuild": "^0.24.0",
     "eslint": "^9.16.0",
     "eslint-plugin-unicorn": "^56.0.1",
     "hono": "^4.6.12",

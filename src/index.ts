@@ -2,8 +2,7 @@ import fs from 'node:fs'
 import { pathToFileURL } from 'node:url'
 import type { Hono } from 'hono'
 
-import { importFile, sortRoutesByParams, transformToRoute } from './utils'
-import path from 'node:path'
+import { sortRoutesByParams, transformToRoute } from './utils'
 
 type Method = 'get' | 'post' | 'put' | 'delete' | 'options' | 'patch' | 'all'
 type SoftString<T extends string> = T | (string & {})
@@ -81,12 +80,7 @@ export const autoloadRoutes = async (app: Hono, {
     const method = matchedFile ? matchedFile[1] as Method : 'get'
 
     const filePath = `${routesDir}/${file.replaceAll('\\', '/')}`
-    const extension = path.extname(filePath)
-    const importedFile = (typeof Bun === 'undefined')
-      ? ((extension === '.ts' || extension === '.tsx')
-        ? await importFile(filePath)
-        : await import(pathToFileURL(filePath).href))
-      : await import(filePath)
+    const importedFile = await import(pathToFileURL(filePath).href)
 
     const resolvedImportName = typeof importKey === 'string' ? importKey : importKey(importedFile)
     const importedRoute = importedFile[resolvedImportName]
