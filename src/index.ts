@@ -76,9 +76,6 @@ export const autoloadRoutes = async (app: Hono, {
   }
 
   for (const file of sortRoutesByParams(files)) {
-    const matchedFile = file.match(/\/?\((.*?)\)/)
-    const method = matchedFile ? matchedFile[1] as Method : 'get'
-
     const filePath = `${routesDir}/${file.replaceAll('\\', '/')}`
     const importedFile = await import(pathToFileURL(filePath).href)
 
@@ -91,6 +88,8 @@ export const autoloadRoutes = async (app: Hono, {
 
     const route = `${prefix}/${transformToRoute(file)}`
     if (typeof importedRoute === 'function') {
+      const matchedFile = file.match(/\/?\((.*?)\)/)
+      const method = matchedFile ? matchedFile[1] as Method : 'get'
       app[method](route, importedRoute)
     } else {
       console.warn(`Exported function of ${filePath} is not a function`)
