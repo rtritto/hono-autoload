@@ -2110,7 +2110,6 @@ __metadata:
     typescript: "npm:^5.7.2"
     typescript-eslint: "npm:^8.17.0"
   peerDependencies:
-    "@hono/node-server": "*"
     hono: "*"
   languageName: unknown
   linkType: soft

@@ -25,7 +25,6 @@
     "od": "yarn outdated"
   },
   "peerDependencies": {
-    "@hono/node-server": "*",
     "hono": "*"
   },
   "devDependencies": {
