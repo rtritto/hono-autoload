@@ -86,10 +86,10 @@ export const autoloadRoutes = async (app: Hono, {
       throw new Error(`${filePath} doesn't export ${resolvedImportName}`)
     }
 
-    const route = `${prefix}/${transformToRoute(file)}`
     if (typeof importedRoute === 'function') {
       const matchedFile = file.match(/\/?\((.*?)\)/)
       const method = matchedFile ? matchedFile[1] as Method : 'get'
+      const route = `${prefix}/${transformToRoute(file)}`
       app[method](route, importedRoute)
     } else {
       console.warn(`Exported function of ${filePath} is not a function`)
