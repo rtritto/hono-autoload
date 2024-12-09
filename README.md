@@ -75,15 +75,15 @@ Guide on how `hono-autoloader` matches routes:
 └── package.json
 ```
 
-- `/routes/index.ts` → `/`
-- `/routes/posts/index.ts` → `/posts`
-- `/routes/posts/[id].ts` → `/posts/:id`
-- `/routes/users.ts` → `/users`
-- `/routes/likes/[...].ts` → `/likes/*`
-- `/routes/domains/@[...]/index.ts` → `/domains/@*`
-- `/routes/frontend/index.tsx` → `/frontend`
-- `/routes/events/(post).ts` → `/events`
-- `/routes/events/(get).ts` → `/events`
+- `/routes/index.ts` → `GET` `/`
+- `/routes/posts/index.ts` → `GET` `/posts`
+- `/routes/posts/[id].ts` → `GET` `/posts/:id`
+- `/routes/users.ts` → `GET` `/users`
+- `/routes/likes/[...].ts` → `GET` `/likes/*`
+- `/routes/domains/@[...]/index.ts` → `GET` `/domains/@*`
+- `/routes/frontend/index.tsx` → `GET` `/frontend`
+- `/routes/events/(post).ts` → `POST` `/events`
+- `/routes/events/(get).ts` → `GET` `/events`
 
 ### Options
 
@@ -95,12 +95,6 @@ Guide on how `hono-autoloader` matches routes:
 | prefix?           | string  | ` `                            | Prefix to be added to each route                                  |
 | routesDir?        | string  | `./routes`                     | The folder where routes are located (use a *relative* path)       |
 | skipImportErrors? | boolean | `false`                        | Throws an error if there is an import error of a route file       |
-
-### Transpile
-For `Vite` + Node.js and similar use cases, where `.ts` or `.tsx` files aren't transpiled, install [esbuild](https://github.com/evanw/esbuild).
-
-*Note*:
-> `Bun` internally transpiles every file it executes (both .js and .ts) → [Read more](https://bun.sh/docs/runtime/typescript#running-ts-files)
 
 ## License
 
