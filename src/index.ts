@@ -5,21 +5,11 @@ import type { Hono } from 'hono'
 import { sortRoutesByParams, transformToRoute } from './utils'
 
 type Method = 'get' | 'post' | 'put' | 'delete' | 'options' | 'patch' | 'all'
-type SoftString<T extends string> = T | (string & {})
 
 const DEFAULT_ROUTES_DIR = './routes'
 const DEFAULT_PATTERN = '**/*.{ts,tsx,mjs,js,jsx,cjs}'
 
 interface AutoloadRoutesOptions {
-  /**
-   * Import a specific `export` from a file
-   * @example import first export
-   * ```ts
-   * importKey: 'default' || (file) => Object.keys(file).at(0)
-   * ```
-   * @default 'default'
-   */
-  importKey?: SoftString<'default'> | ((file: unknown) => string)
   /**
    * Throws an error if no matches are found
    * @default true
@@ -52,7 +42,6 @@ interface AutoloadRoutesOptions {
 }
 
 export const autoloadRoutes = async (app: Hono, {
-  importKey = 'default',
   failGlob = true,
   pattern = DEFAULT_PATTERN,
   prefix = '',
@@ -77,14 +66,11 @@ export const autoloadRoutes = async (app: Hono, {
 
   for (const file of sortRoutesByParams(files)) {
     const universalFile = file.replaceAll('\\', '/')
-    const filePath = `${routesDir}/${universalFile}`
-    const importedFile = await import(pathToFileURL(filePath).href)
-
-    const resolvedImportName = typeof importKey === 'string' ? importKey : importKey(importedFile)
-    const importedRoute = importedFile[resolvedImportName]
+    const filePath = pathToFileURL(`${routesDir}/${universalFile}`).href
+    const { default: importedRoute } = await import(filePath)
 
     if (!importedRoute && !skipImportErrors) {
-      throw new Error(`${filePath} doesn't export ${resolvedImportName}`)
+      throw new Error(`${filePath} doesn't have default export`)
     }
 
     if (typeof importedRoute === 'function') {

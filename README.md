@@ -90,7 +90,6 @@ Guide on how `hono-autoloader` matches routes:
 | Key               | Type    | Default                        | Description                                                       |
 | ----------------- | ------- | ------------------------------ | ----------------------------------------------------------------- |
 | failGlob?         | boolean | `true`                         | Throws an error if no matches are found                           |
-| importKey?        | string  | `default`                      | The key (name) of the exported function of route files            |
 | pattern?          | string  | `**/*.{ts,tsx,js,jsx,mjs,cjs}` | [Glob patterns](https://en.wikipedia.org/wiki/Glob_(programming)) |
 | prefix?           | string  | ` `                            | Prefix to be added to each route                                  |
 | routesDir?        | string  | `./routes`                     | The folder where routes are located (use a *relative* path)       |
